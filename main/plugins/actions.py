@@ -49,20 +49,20 @@ async def force_sub(id):
 
 async def set_thumbnail(event, img):
     db = Database(MONGODB_URI, 'videoconvertor')
-    edit = await event.client.send_message(event.chat_id, 'Trying to process.')
+    edit = await event.client.send_message(event.chat_id, 'Trying to process....🔃')
     try:
         path = await event.client.download_media(img)
         meta = upload_file(path)
         link = f'https://telegra.ph{meta[0]}'
     except Exception as e:
         print(e)
-        return await edit.edit("Failed to Upload on Tgraph.")
+        return await edit.edit("Failed to Upload on Telegraph")
     await db.update_thumb_link(event.sender_id, link)
     await edit.edit("Done!")
     
 async def rem_thumbnail(event):
     db = Database(MONGODB_URI, 'videoconvertor')
-    edit = await event.client.send_message(event.chat_id, 'Trying.')
+    edit = await event.client.send_message(event.chat_id, 'Trying....🔃')
     T = await db.get_thumb(event.sender_id)
     if T is None:
         return await edit.edit('No thumbnail saved!')
@@ -114,9 +114,9 @@ async def msg(event):
         await event.reply("Reply to the message you want to send!")
     user = event.pattern_match.group(1)
     if not user:
-        await event.reply("Give the user id you want me to send message. ")
+        await event.reply("Give the user id you want me to send message")
     await Drone.send_message(int(user) , ok )
-    await event.reply("Messsage sent.")
+    await event.reply("Messsage sent")
     
 #Listing--------------------------------------------------------------------------------------------------------------
 
