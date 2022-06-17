@@ -31,7 +31,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     if ps_name is None:
         ps_name = '**COMPRESSING:**'
     Drone = event.client
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "Trying to process....🔃", reply_to=msg.id)
     new_name = "out_" + dt.now().isoformat("_", "seconds")
     if hasattr(msg.media, "document"):
         file = msg.media.document
@@ -58,8 +58,8 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     _ps = "COMPRESS"
     if ps_name != "**COMPRESSING:**":
         _ps = "ENCODE"
-    log = await LOG_START(event, f'**{str(_ps)} PROCESS STARTED**\n\n[Bot is busy now]({SUPPORT_LINK})')
-    log_end_text = f'**{_ps} PROCESS FINISHED**\n\n[Bot is free now]({SUPPORT_LINK})'
+    log = await LOG_START(event, f'**{str(_ps)} PROCESS STARTED**\n[Bot is busy now]({SUPPORT_LINK})')
+    log_end_text = f'**{_ps} PROCESS FINISHED**\n[Bot is free now]({SUPPORT_LINK})'
     try:
         await fast_download(n, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
@@ -67,10 +67,10 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         await log.delete()
         await LOG_END(event, log_end_text)
         print(e)
-        return await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
+        return await edit.edit(f"❌ An error occured while downloading.\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False) 
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
-    await edit.edit("Extracting metadata...")
+    await edit.edit("Extracting metadata...🔃")
     vid = ffmpeg.probe(name)
     codec = vid['streams'][0]['codec_name']
     hgt = video_metadata(name)["height"]
@@ -79,21 +79,21 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         if hgt == 360 or wdt == 640:
             await log.delete()
             await LOG_END(event, log_end_text)
-            await edit.edit("Fast compress cannot be used for this media, try using HEVC!")
+            await edit.edit("Fast compress cannot be used for this media, try using HEVC ❕")
             os.rmdir("encodemedia")
             return
     if ffmpeg_cmd == 3:
         if codec == 'hevc':
             await log.delete()
             await LOG_END(event, log_end_text)
-            await edit.edit("The given video is already in H.265 codec.")
+            await edit.edit("The given video is already in H.265 codec ❕")
             os.rmdir("encodemedia")
             return
     if ffmpeg_cmd == 4:
         if codec == 'h264':
             await log.delete()
             await LOG_END(event, log_end_text)
-            await edit.edit("The given video is already in H.264 codec.")
+            await edit.edit("The given video is already in H.264 codec❕")
             os.rmdir("encodemedia")
             return
     FT = time.time()
@@ -114,7 +114,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
         await LOG_END(event, log_end_text)
         os.rmdir("encodemedia")
         print(e)
-        return await edit.edit(f"An error occured while FFMPEG progress.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)  
+        return await edit.edit(f"An error occured while FFMPEG progress\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)  
     out2 = dt.now().isoformat("_", "seconds") + ".mp4" 
     if msg.file.name:
         out2 = msg.file.name
@@ -127,7 +127,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
     if ps_name != "**ENCODING:**":
         text = f'**COMPRESSED by** : @{BOT_UN}\n\nbefore compressing : `{i_size}`\nafter compressing : `{f_size}`'
     UT = time.time()
-    await log.edit("Uploading file.")
+    await log.edit("Uploading file....📤")
     if 'x-matroska' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
@@ -137,7 +137,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
             await LOG_END(event, log_end_text)
             os.rmdir("encodemedia")
             print(e)
-            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await edit.edit(f"An error occured while uploading\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     elif 'webm' in mime:
         try:
             uploader = await fast_upload(f'{out2}', f'{out2}', UT, Drone, edit, '**UPLOADING:**')
@@ -147,7 +147,7 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
             await LOG_END(event, log_end_text)
             os.rmdir("encodemedia")
             print(e)
-            return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+            return await edit.edit(f"An error occured while uploading\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     else:
         metadata = video_metadata(out2)
         width = metadata["width"]
@@ -166,12 +166,12 @@ async def compress(event, msg, ffmpeg_cmd=0, ps_name=None):
                 await LOG_END(event, log_end_text)
                 os.rmdir("encodemedia")
                 print(e)
-                return await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+                return await edit.edit(f"An error occured while uploading\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
     await edit.delete()
     os.remove(name)
     os.remove(out2)
     await log.delete()
-    log_end_text2 = f'**{_ps} PROCESS FINISHED**\n\nTime Taken: {round((time.time()-DT)/60)} minutes\nInitial size: {i_size/1000000}mb.\nFinal size: {f_size/1000000}mb.\n\n[Bot is free now.]({SUPPORT_LINK})'
+    log_end_text2 = f'**{_ps} PROCESS FINISHED**\nTime Taken: {round((time.time()-DT)/60)} minutes\nInitial size: {i_size/1000000}mb.\nFinal size: {f_size/1000000}mb.\n\n[Bot is free now.]({SUPPORT_LINK})'
     await LOG_END(event, log_end_text2)
     
 
