@@ -26,7 +26,7 @@ from LOCAL.localisation import info_text, spam_notice, help_text, DEV, source_te
 async def start(event):
     await event.reply(f'{st}', 
                       buttons=[
-                              [Button.inline("Menu.", data="menu")]
+                              [Button.inline("🏠 Menu", data="menu")]
                               ])
     tag = f'[{event.sender.first_name}](tg://user?id={event.sender_id})'
     await Drone.send_message(int(ACCESS_CHANNEL), f'{tag} started the BOT')
@@ -37,9 +37,9 @@ async def menu(event):
     
 @Drone.on(events.callbackquery.CallbackQuery(data="info"))
 async def info(event):
-    await event.edit(f'**ℹ️NFO:**\n\n{info_text}',
+    await event.edit(f'**ℹ️NFO:**\n{info_text}',
                     buttons=[[
-                         Button.inline("Menu.", data="menu")]])
+                         Button.inline("🏠 Menu", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="notice"))
 async def notice(event):
@@ -49,27 +49,28 @@ async def notice(event):
 async def source(event):
     await event.edit(source_text,
                     buttons=[[
-                         Button.url("FOR PERSONAL USE", url="https://github.com/vasusen-code/videoconvertor/tree/main"),
-                         Button.url("FOR YOUR CHANNEL ", url="https://github.com/vasusen-code/videoconvertor/")]])
+                         Button.url("Bot Updates", url="https://t.me/HYBRID_Bots"),
+                         Button.url("Movies", url="https://t.me/hybrid_movies")],
+                         [
+                         Button.inline("🔙 Back", data="menu")]])
                          
-                    
 @Drone.on(events.callbackquery.CallbackQuery(data="help"))
 async def help(event):
     await event.edit('**👥HELP & SETTINGS**',
                     buttons=[[
-                         Button.inline("SET THUMB", data="sett"),
-                         Button.inline("REM THUMB", data='remt')],
+                         Button.inline("Set Thumbnail", data="sett"),
+                         Button.inline("Remove Thumbnail", data='remt')],
                          [
-                         Button.inline("PLUGINS", data="plugins"),
-                         Button.inline("RESTART", data="restart")],
-                         [Button.url("SUPPORT", url=f"{SUPPORT_LINK}")],
+                         Button.inline("Plugins", data="plugins"),
+                         Button.inline("Restart", data="restart")],
+                         [Button.url("Support", url=f"{SUPPORT_LINK}")],
                          [
-                         Button.inline("BACK", data="menu")]])
+                         Button.inline("🔙 Back", data="menu")]])
     
 @Drone.on(events.callbackquery.CallbackQuery(data="plugins"))
 async def plugins(event):
     await event.edit(f'{help_text}',
-                    buttons=[[Button.inline("Menu.", data="menu")]])
+                    buttons=[[Button.inline("🏠 Menu", data="menu")]])
                    
  #-----------------------------------------------------------------------------------------------                            
     
@@ -79,15 +80,15 @@ async def sett(event):
     msg = await button.get_reply_message() 
     await event.delete()
     async with Drone.conversation(event.chat_id) as conv: 
-        xx = await conv.send_message("Send me any image for thumbnail as a `reply` to this message.")
+        xx = await conv.send_message("Send me any image for thumbnail as a `reply` to this message")
         x = await conv.get_reply()
         if not x.media:
-            xx.edit("No media found.")
+            xx.edit("No media found")
         mime = x.file.mime_type
         if not 'png' in mime:
             if not 'jpg' in mime:
                 if not 'jpeg' in mime:
-                    return await xx.edit("No image found.")
+                    return await xx.edit("No image found")
         await set_thumbnail(event, x.media)
         await xx.delete()
         
@@ -106,4 +107,4 @@ async def res(event):
     elif result is False:
         await event.edit("An error occured!")
     elif result is True:
-        await event.edit("Restarting app, wait for a minute.")
+        await event.edit("Restarting app, wait for a minute....")
