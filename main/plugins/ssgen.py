@@ -52,7 +52,7 @@ async def ssgen(video, time_stamp):
 async def screenshot(event, msg):
     Drone = event.client
     name = dt.now().isoformat("_", "seconds") + ".mp4"
-    edit = await Drone.send_message(event.chat_id, "Trying to process.", reply_to=msg.id)
+    edit = await Drone.send_message(event.chat_id, "Trying to process....🔃", reply_to=msg.id)
     if hasattr(msg.media, "document"):
         file = msg.media.document
     else:
@@ -63,7 +63,7 @@ async def screenshot(event, msg):
         await fast_download(name, file, Drone, edit, time.time(), "**DOWNLOADING:**")
     except Exception as e:
         print(e)
-        return await edit.edit(f"An error occured while downloading.") 
+        return await edit.edit(f"An error occured while downloading") 
     pictures = []
     captions = []
     n = [8, 7, 6, 5, 4, 3, 2, 1.5, 1.25, 1.10]
@@ -73,7 +73,7 @@ async def screenshot(event, msg):
         if sshot is not None:
             pictures.append(sshot)
             captions.append(f'screenshot at {hhmmss(duration/n[i])}')
-            await edit.edit(f"`{i+1}` screenshot generated.")
+            await edit.edit(f"`{i+1}` screenshot generated ✅")
     if len(pictures) > 0:
         await Drone.send_file(event.chat_id, pictures, caption=captions)
     else:
