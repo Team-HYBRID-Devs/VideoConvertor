@@ -28,7 +28,7 @@ from LOCAL.localisation import JPG3 as t
 from LOCAL.localisation import SUPPORT_LINK
 
 async def media_rename(event, msg, new_name):
-    edit = await event.client.send_message(event.chat_id, 'Trying to process.', reply_to=msg.id)
+    edit = await event.client.send_message(event.chat_id, 'Trying to process...🔃', reply_to=msg.id)
     db = Database(MONGODB_URI, 'videoconvertor')
     T = await db.get_thumb(event.sender_id)
     if T is not None:
@@ -91,7 +91,7 @@ async def media_rename(event, msg, new_name):
     else:
         default_name = msg.file.name
         if not default_name:
-            await edit.edit("Failed fetching extension of your file.")
+            await edit.edit("Failed fetching extension of your file")
         else:
             try:
                 name = msg.file.name
@@ -102,22 +102,22 @@ async def media_rename(event, msg, new_name):
                 UT = time.time()
                 uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
-                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=THUMB, force_document=True)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\nTotal time:{net_time} seconds.", thumb=THUMB, force_document=True)
             except Exception as e:
-                await edit.edit(f"An error occured.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+                await edit.edit(f"An error occured\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
                 print(e)
                 return
     try:  
         await fast_download(name, file, Drone, edit, DT, "**DOWNLOADING:**")
     except Exception as e:
-        await edit.edit(f"An error occured while downloading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+        await edit.edit(f"An error occured while downloading\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     await edit.edit("Renaming.")
     try:
         rename(name, out)
     except Exception as e:
-        await edit.edit(f"An error occured while renaming.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+        await edit.edit(f"An error occured while renaming\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     try:
@@ -125,7 +125,7 @@ async def media_rename(event, msg, new_name):
             UT = time.time()
             uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
             net_time = round(DT - UT)
-            await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=THUMB, force_document=True)
+            await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\nTotal time:{net_time} seconds", thumb=THUMB, force_document=True)
         else:
             if 'mp4' in mime:
                 metadata = video_metadata(out)
@@ -136,7 +136,7 @@ async def media_rename(event, msg, new_name):
                 UT = time.time()
                 uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
-                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=THUMB, attributes=attributes, force_document=False)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\nTotal time:{net_time} seconds", thumb=THUMB, attributes=attributes, force_document=False)
             elif msg.video:
                 metadata = video_metadata(out)
                 width = metadata["width"]
@@ -146,14 +146,14 @@ async def media_rename(event, msg, new_name):
                 UT = time.time()
                 uploader = await fast_upload(f'{out}', f'{out}', UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
-                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=THUMB, attributes=attributes, force_document=False)            
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\nTotal time:{net_time} seconds", thumb=THUMB, attributes=attributes, force_document=False)            
             else:
                 UT = time.time()
                 uploader = await fast_upload(out, out, UT, Drone, edit, '**UPLOADING:**')
                 net_time = round(DT - UT)
-                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\n\nTotal time:{net_time} seconds.", thumb=THUMB, force_document=True)
+                await Drone.send_file(event.chat_id, uploader, caption=f"**Renamed by** : @{BOT_UN}\nTotal time:{net_time} seconds", thumb=THUMB, force_document=True)
     except Exception as e:
-        await edit.edit(f"An error occured while uploading.\n\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
+        await edit.edit(f"An error occured while uploading\nContact [SUPPORT]({SUPPORT_LINK})", link_preview=False)
         print(e)
         return
     await edit.delete()
