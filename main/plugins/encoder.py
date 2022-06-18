@@ -27,7 +27,7 @@ from main.plugins.actions import LOG_START, LOG_END
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 
-from .ffprobe import FFProbe
+from ffprobe import FFProbe
 
 async def encode(event, msg, scale=0):
     ps_name = str(f"**{scale}p ENCODING:**")
