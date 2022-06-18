@@ -70,7 +70,7 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...🔃")
-    vid = FFprobe(name)
+    vid = (name)
     hgt = int(vid['streams'][0]['height'])
     wdt = int(vid['streams'][0]['width'])
     if scale == hgt:
