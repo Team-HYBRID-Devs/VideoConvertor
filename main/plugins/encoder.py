@@ -27,6 +27,8 @@ from main.plugins.actions import LOG_START, LOG_END
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
 
+from .ffprobe import FFProbe
+
 async def encode(event, msg, scale=0):
     ps_name = str(f"**{scale}p ENCODING:**")
     _ps = str(f"{scale}p ENCODE")
@@ -68,7 +70,7 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...🔃")
-    vid = ffprobe(name)
+    vid = FFprobe(name)
     hgt = int(vid['streams'][0]['height'])
     wdt = int(vid['streams'][0]['width'])
     if scale == hgt:
