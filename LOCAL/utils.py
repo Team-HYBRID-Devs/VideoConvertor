@@ -13,7 +13,7 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 import time, math, re, asyncio, subprocess
-from ethon.pyfunc import total_frames as tf
+from HYBRID.pyfunc import total_frames as tf
 from telethon import events
 
 def time_formatter(milliseconds: int) -> str:

@@ -18,9 +18,9 @@ from datetime import datetime as dt
 from telethon import events
 from telethon.errors.rpcerrorlist import MessageNotModifiedError
 from telethon.tl.types import DocumentAttributeVideo
-from ethon.telefunc import fast_download, fast_upload
-from ethon.pyfunc import video_metadata, bash
-from ethon.pyutils import rename
+from HYBRID.telefunc import fast_download, fast_upload
+from HYBRID.pyfunc import video_metadata, bash
+from HYBRID.pyutils import rename
 
 from .. import Drone, BOT_UN
 

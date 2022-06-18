@@ -1,0 +1,100 @@
+# Query: ethon
+# ContextLines: 1
+
+42 results - 14 files
+
+requirements.txt:
+  2  dnspython
+  3  ffmpeg-python
+
+LOCAL/localisation.py:
+  11  
+  12: info_text = "This bot is edited by @HYBRID_Bots\nWritten in python library TELETHON\nBot by : @HYBRID_Bots\nSupport : @HYBRID_Chat\nVersion : V1.4 BETA"   
+  13  
+
+LOCAL/utils.py:
+  15  import time, math, re, asyncio, subprocess
+  16: from ethon.pyfunc import total_frames as tf
+  17: from telethon import events
+  18  
+
+main/__init__.py:
+  1: from telethon import TelegramClient
+  2  from decouple import config
+
+main/plugins/actions.py:
+  18  from telegraph import upload_file
+  19: from telethon import events , Button
+  20: from telethon.errors.rpcerrorlist import UserNotParticipantError, FloodWaitError
+  21: from telethon.tl.functions.channels import GetParticipantRequest
+  22  
+
+main/plugins/compressor.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from telethon.errors.rpcerrorlist import MessageNotModifiedError
+  20: from telethon.tl.types import DocumentAttributeVideo
+  21: from ethon.telefunc import fast_download, fast_upload
+  22: from ethon.pyfunc import video_metadata
+  23  
+
+main/plugins/convertor.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from telethon.tl.types import DocumentAttributeVideo
+  20: from ethon.telefunc import fast_download, fast_upload
+  21: from ethon.pyfunc import bash, video_metadata
+  22: from ethon.pyutils import rename
+  23  
+
+main/plugins/dbstuff.py:
+  14  
+  15: from telethon import events, Button
+  16  from decouple import config
+
+main/plugins/encoder.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from telethon.errors.rpcerrorlist import MessageNotModifiedError
+  20: from telethon.tl.types import DocumentAttributeVideo
+  21: from ethon.telefunc import fast_download, fast_upload
+  22: from ethon.pyfunc import video_metadata
+  23  
+
+main/plugins/main.py:
+  16  
+  17: from telethon import events, Button
+  18: from telethon.tl.types import DocumentAttributeVideo
+  19: from ethon.telefunc import fast_download
+  20: from ethon.pyfunc import video_metadata
+  21  
+
+main/plugins/rename.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from telethon.tl.types import DocumentAttributeVideo
+  20  from HYBRID.telefunc import fast_download, fast_upload
+
+main/plugins/ssgen.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from ethon.telefunc import fast_download
+  20: from ethon.pyfunc import video_metadata
+  21  
+
+main/plugins/start.py:
+  14  
+  15: from telethon import events, Button
+  16: from ethon.teleutils import mention
+  17: from ethon.mystarts import vc_menu
+  18  
+
+main/plugins/trimmer.py:
+  17  from datetime import datetime as dt
+  18: from telethon import events
+  19: from telethon.errors.rpcerrorlist import MessageNotModifiedError
+  20: from telethon.tl.types import DocumentAttributeVideo
+  21: from ethon.telefunc import fast_download, fast_upload
+  22: from ethon.pyfunc import video_metadata, bash
+  23: from ethon.pyutils import rename
+  24  

@@ -16,8 +16,8 @@ import os, time, asyncio
 
 from telethon import events, Button
 from telethon.tl.types import DocumentAttributeVideo
-from ethon.telefunc import fast_download
-from ethon.pyfunc import video_metadata
+from HYBRID.telefunc import fast_download
+from HYBRID.pyfunc import video_metadata
 
 from .. import Drone, LOG_CHANNEL, FORCESUB_UN, MONGODB_URI, ACCESS_CHANNEL
 

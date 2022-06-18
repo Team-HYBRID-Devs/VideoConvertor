@@ -16,8 +16,8 @@ import os, time, subprocess, asyncio
 
 from datetime import datetime as dt
 from telethon import events
-from ethon.telefunc import fast_download
-from ethon.pyfunc import video_metadata
+from HYBRID.telefunc import fast_download
+from HYBRID.pyfunc import video_metadata
 
 def hhmmss(seconds):
     x = time.strftime('%H:%M:%S',time.gmtime(seconds))

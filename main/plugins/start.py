@@ -13,8 +13,8 @@
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
 from telethon import events, Button
-from ethon.teleutils import mention
-from ethon.mystarts import vc_menu
+from HYBRID.teleutils import mention
+from HYBRID.mystarts import vc_menu
 
 from .. import Drone, ACCESS_CHANNEL, AUTH_USERS
 
