@@ -2,6 +2,7 @@ cryptg
 dnspython
 ffmpeg
 ffmpeg-python
+ffprobe-python
 heroku3
 motor
 Pillow>=5.3.0
