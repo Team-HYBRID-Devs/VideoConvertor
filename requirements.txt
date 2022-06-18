@@ -1,5 +1,6 @@
 cryptg
 dnspython
+ffmpeg
 ffmpeg-python
 heroku3
 motor
