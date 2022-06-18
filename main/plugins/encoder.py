@@ -12,7 +12,7 @@
 #
 #  License can be found in < https://github.com/vasusen-code/VIDEOconvertor/blob/public/LICENSE> .
 
-import asyncio, time, subprocess, re, os, ffmpeg, ffprobe
+import asyncio, time, subprocess, re, os, ffmpeg
 
 from datetime import datetime as dt
 from telethon import events
@@ -26,8 +26,6 @@ from .. import Drone, BOT_UN, LOG_CHANNEL
 from main.plugins.actions import LOG_START, LOG_END
 from LOCAL.localisation import SUPPORT_LINK, JPG, JPG2, JPG3
 from LOCAL.utils import ffmpeg_progress
-
-from ffprobe import FFProbe
 
 async def encode(event, msg, scale=0):
     ps_name = str(f"**{scale}p ENCODING:**")
@@ -70,7 +68,7 @@ async def encode(event, msg, scale=0):
     name = '__' + dt.now().isoformat("_", "seconds") + ".mp4"
     os.rename(n, name)
     await edit.edit("Extracting metadata...🔃")
-    vid = (name)
+    vid = ffmpeg.probe(name)
     hgt = int(vid['streams'][0]['height'])
     wdt = int(vid['streams'][0]['width'])
     if scale == hgt:
